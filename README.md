@@ -1,1 +1,2 @@
-# Death Quadrant Unreal Engine 5 project.  Author Etienne CHAPELOT
+Final Year Game Project in Unreal 5 IN PROGRESS !!!
+The game is a multiplayer first-person shooter that takes place in a circular map. The map is divided into separate sections called zones or quadrants. Each time period, a new zone will be activated and become deadly, while the previous zone will become available. Any player inside these dead zones will die. The central area will always be safe for players to go into to escape.
