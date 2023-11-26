@@ -1,0 +1,16 @@
+@startuml
+
+title BP Blade Sequence Diagram
+participant "FPS Arena Map" as FPS_Map 
+participant Wall_Trap as Wall_Trap  #9999FF
+participant "Right Wall" as Wall_R  #FF9999
+participant "Left Wall" as Wall_L  #FF9999
+== Set the trap ==
+FPS_Map -> Wall_Trap: Set()
+Wall_Trap --> Wall_R: Scale \n Vector (X=8, Y=2, Z=1)
+Wall_Trap --> Wall_L: Scale \n Vector (X=8, Y=2, Z=1)
+== Reset the trap ==
+FPS_Map -> Wall_Trap: Reset()
+Wall_Trap --> Wall_R: Scale \n Vector (X=1, Y=1, Z=1)
+Wall_Trap --> Wall_L: Scale \n Vector (X=1, Y=1, Z=1)
+@enduml

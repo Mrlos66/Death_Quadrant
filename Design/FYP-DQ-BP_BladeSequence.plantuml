@@ -1,0 +1,18 @@
+@startuml
+
+title BP Blade Sequence Diagram
+participant "FPS Arena Map" as FPS_Map
+participant Blade as Blade  #9999FF
+participant Wall as Wall  #9999FF
+== Open the blades ==
+FPS_Map -> Blade: Open()
+loop NumOfBlade 
+    Blade --> Wall: Rotate \n Rotation (Z=90)
+end
+== Close the blades ==
+FPS_Map -> Blade: Close()
+loop NumOfBlade 
+    Blade --> Wall: Rotate \n Rotation (Z=90)
+end
+
+@enduml

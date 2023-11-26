@@ -1,0 +1,25 @@
+@startuml
+skinparam groupInheritance 2
+title BP Wall Class Hierarchy
+class BP_Wall {
++ NewMaterial - MaterialInterface
++ Cube - StaticMesh
++ CurrentScale - Vector
++ CurrentRotation - Rotator
++ Scale()
++ Rotate()
+}
+
+class BP_WallTrap {
+    + Set()
+    + Reset()
+}
+class BP_Blade {
+    + Open()
+    + Close()
+}
+
+BP_WallTrap "1" *-- "2" BP_Wall : contains
+BP_Blade "1" *-- "many" BP_Wall : contains
+
+@enduml
