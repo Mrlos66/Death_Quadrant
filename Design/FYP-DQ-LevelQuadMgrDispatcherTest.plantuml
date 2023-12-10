@@ -1,0 +1,22 @@
+@startuml
+participant "Level" as Level  #9999FF
+participant "Quadrant Manager" as QuadMgr  #9999FF
+
+== Sequence Initialisation ==
+Level-->QuadMgr: Bind to Event Dispatcher \n (NewQuadrantsSelected)
+Level-->QuadMgr: Bind to Event Dispatcher \n (NewQuadrantsEnabled)
+Level-->QuadMgr: Bind to Event Dispatcher \n (CentreEnabled)
+Level-->QuadMgr: Bind to Event Dispatcher \n (SequenceCompleted)
+Level-->QuadMgr: InitQuadrant
+== Testing Bind Event Dispatcher ==
+Level-->QuadMgr: StartQuadrant
+loop NumberOfSequence
+    QuadMgr-->Level: NewQuadrantsSelected
+    QuadMgr-->Level: NewQuadrantsEnabled
+end
+QuadMgr-->Level: NewQuadrantsSelected
+QuadMgr-->Level: CentreEnabled
+QuadMgr-->Level: SequenceCompleted
+
+@enduml
+

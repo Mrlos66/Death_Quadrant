@@ -1,6 +1,6 @@
 @startuml
 
-title BP Blade Sequence Diagram
+title BP Wall Trap Sequence Diagram
 participant "FPS Arena Map" as FPS_Map 
 participant Wall_Trap as Wall_Trap  #9999FF
 participant "Right Wall" as Wall_R  #FF9999

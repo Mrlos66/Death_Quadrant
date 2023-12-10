@@ -1,19 +1,77 @@
 @startuml
+participant "Player" as Player  #99FF99
+participant "Game Controller" as GameController #9999FF
 participant "Level" as Level  #9999FF
-participant "Quadrant Manager" as QuadMgr #9999FF
+participant "Quadrant Manager" as QuadMgr  #9999FF
+
+== Game mode selection ==
+Player-->GameController: SelectMode
+
+note right
+    -- GameMode --
+    The GameMode can be 
+    * Multiplayer mode 
+    * Solo mode with Zombie AI.
+end note
+GameController-->Level: SpawnLevel
+
 == Sequence Initialisation ==
-Level-->QuadMgr: Bind to Event Dispatcher \n (NewQuadrantsSelected)
-Level-->QuadMgr: Bind to Event Dispatcher \n (NewQuadrantsEnabled)
-Level-->QuadMgr: Bind to Event Dispatcher \n (CentreEnabled)
-Level-->QuadMgr: Bind to Event Dispatcher \n (SequenceCompleted)
 Level-->QuadMgr: InitQuadrant
-== Testing bind event Dispatcher ==
+note right
+    -- Parameters --
+    * NumberOfSequence
+    * DeathZoneTime
+    * WarningTime
+    * NumQuadrantToTrigger
+    * Quadrants
+end note
+== Timer during Game play ==
 Level-->QuadMgr: StartQuadrant
 loop NumberOfSequence
+    QuadMgr-->QuadMgr: SelectNewQuadrants
+    note right
+        The quadrant will be in warning e.g. still safe
+        for a duration = WarningTime
+    end note
     QuadMgr-->Level: NewQuadrantsSelected
-    QuadMgr-->Level: NewQuadrantsEnabled
+    note left 
+    The new selected quadrant will turn 
+    orange to warn the player to get
+    out of the deathzone.
+    end note
+    QuadMgr-->QuadMgr: EnableQuadrants
+    note right
+        The quadrant will be enabled for a
+        duration = DeathZoneTime
+    end note
+    QuadMgr-->Level: NewQuadrantsEnabled    
+    note left
+       The new selected Quadrant turns 
+       red the player dies if in the 
+       deathzone.
+    end note
 end
+QuadMgr-->QuadMgr: SelectNewQuadrants
 QuadMgr-->Level: NewQuadrantsSelected
+QuadMgr-->QuadMgr: EnableCentre
 QuadMgr-->Level: CentreEnabled
+note left
+    All the Quadrant in the level becomes
+    hot except the centre. The 3D tower
+    raise from the ground for the final battle.
+end note
+QuadMgr-->QuadMgr: EndSequence
 QuadMgr-->Level: SequenceCompleted
+
+Level-->GameController: SaveStatistics \n(e.g. NumberOFKills)
+note right
+    -- Round Stats --
+    Score is saved
+    NumberOFKills is saved
+end note
 @enduml
+
+
+
+
+
